@@ -1,1 +1,28 @@
-/target
+# Rust build artifacts
+kitten/target/
+
+# Executables & binaries
+*.exe
+*.dll
+*.so
+*.dylib
+*.rlib
+
+# Logs & temporary files
+*.log
+
+# IDE / Editor folders
+.vscode/
+.idea/
+*.swp
+*.swo
+*.bak
+
+# macOS junk
+.DS_Store
+
+# Windows junk
+Thumbs.db
+
+# Backup files
+*~

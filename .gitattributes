@@ -1,0 +1,4 @@
+* text=auto eol=lf
+
+# Rust code treated as UTF-8 source
+*.rs linguist-language=Rust
