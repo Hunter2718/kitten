@@ -23,9 +23,9 @@ It supports all common `cat` flags (including `-A`, `-v`, `-E`, `-T`, `-b`, `-n`
 
 ## 📆 Installation
 
-### 🔹 Option 1: Download Prebuilt Release
+### 🔹 Option 1: Download Prebuilt Release (Recommended)
 
-Grab the latest release from the [Releases page](https://github.com/Hunter2718/kitten/releases/#latest). Each release includes:
+ Each release includes:
 
 - A precompiled binary: `kitten`
 - An `assets/` directory with:
@@ -33,10 +33,11 @@ Grab the latest release from the [Releases page](https://github.com/Hunter2718/k
   - `versionfile.txt`
 
 To install:
+Grab the latest release from the [Releases page](https://github.com/Hunter2718/kitten/releases/#latest).
 
 ```bash
-wget https://github.com/Hunter2718/kitten/releases/download/v1.0.0/kitten-x86_64.tar.gz
-tar -xf kitten-x86_64.tar.gz
+tar -xf kitten-v1.0.0-x86_64.tar.gz
+cd kitten-v1.0.0-x86_64.tar.gz
 chmod +x kitten
 ./kitten --help
 ```
