@@ -1,0 +1,18 @@
+Kitten 🐾 - A Rusty clone of the Unix 'cat' command.
+
+Usage:
+  kitten <file1> <file2> ...        Read and print contents of one or more files.
+  kitten                            Read from standard input (pipe data in).
+
+Options:
+  -h, --help                        Show this help message and exit.
+
+Examples:
+  kitten file.txt                   Prints file.txt to stdout.
+  kitten file1.txt file2.txt        Prints both files in order.
+  echo "hello" | kitten             Prints stdin input to stdout.
+
+About:
+  Kitten is a learning project by https://github.com/Hunter2718 
+  It's a safe and fast reimplementation of 'cat' in Rust.
+
