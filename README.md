@@ -36,8 +36,8 @@ To install:
 Grab the latest release from the [Releases page](https://github.com/Hunter2718/kitten/releases/#latest).
 
 ```bash
-tar -xf kitten-v1.0.0-x86_64.tar.gz
-cd kitten-v1.0.0-x86_64.tar.gz
+tar -xf kitten-v1.0.0-x86_64-linux.tar.gz
+cd kitten-v1.0.0-x86_64-linux.tar.gz
 chmod +x kitten
 ./kitten --help
 ```
