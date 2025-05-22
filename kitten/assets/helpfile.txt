@@ -1,18 +1,33 @@
-Kitten 🐾 - A Rusty clone of the Unix 'cat' command.
+Kitten - A Rusty clone of the Unix cat command
 
-Usage:
-  kitten <file1> <file2> ...        Read and print contents of one or more files.
-  kitten                            Read from standard input (pipe data in).
+USAGE:
+kitten [FLAGS] [FILES]...
 
-Options:
-  -h, --help                        Show this help message and exit.
+FLAGS:
+-n, --number              Number all output lines
+-b, --number-nonblank     Number non-blank output lines only
+-s, --squeeze-blank       Suppress repeated blank lines
+-E, --show-ends           Display $ at end of each line
+-T, --show-tabs           Display tab characters as ^I
+-v, --show-nonprinting    Show non-printing characters (except \t and \n)
+-A, --show-all            Equivalent to -vET
+-e                        Equivalent to -vE
+-t                        Equivalent to -vT
+--help                Display this help message
+--version             Show version information
 
-Examples:
-  kitten file.txt                   Prints file.txt to stdout.
-  kitten file1.txt file2.txt        Prints both files in order.
-  echo "hello" | kitten             Prints stdin input to stdout.
+Reads from standard input when no files are given
 
-About:
-  Kitten is a learning project by https://github.com/Hunter2718 
-  It's a safe and fast reimplementation of 'cat' in Rust.
 
+NOTES:
+
+Multiple flags can be combined (e.g., -v -E), but not squashed (e.g., -vE won't work)
+
+Files are read in order; - indicates stdin
+
+For more information check out my official github at https://github.com/Hunter2718
+
+
+OTHER WORK:
+
+My other work can be found at https://github.com/Hunter2718
