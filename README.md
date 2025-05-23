@@ -5,6 +5,14 @@ Kitten is a Rust-powered reimplementation of the classic Unix `cat` command — 
 It supports all common `cat` flags (including `-A`, `-v`, `-E`, `-T`, `-b`, `-n`, `-s`, `-e`, and `-t`) while offering a clean, safe codebase written entirely in Rust.
 
 ---
+## 📊 Performance
+
+| Binary  | Size   | Speed (10MB file) | Relative |
+|---------|--------|-------------------|----------|
+| `cat`   | 40 KB  | 3.9 ms            | 1.00x    |
+| `kitten` (release) | 412 KB | 8.0 ms            | 2.03x slower |
+
+> Benchmarked with [hyperfine](https://github.com/sharkdp/hyperfine) on a UTF-8 test file.
 
 ## 🚀 Features
 
