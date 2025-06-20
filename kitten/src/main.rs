@@ -1,7 +1,4 @@
-use std::fs;
-use std::io::{self, Error, BufRead, IsTerminal, ErrorKind};
-use std::path::Path;
-use std::env;
+#![no_std]
 
 const HELP_FILE_PATH: &'static str = "assets/helpfile.txt";
 const VERSION_INFO_FILE_PATH: &'static str = "assets/versionfile.txt";
@@ -33,54 +30,37 @@ fn main() -> Result<(), Error> {
         return Ok(());
     }
 
-    
     if config.files.is_empty() {
-
-        output.push_str( 
-            &match read_stdin() {
-                Err(e) => return Err(e),
-                Ok(c) => c,
-            }
-        );
-
-
+        output.push_str(&match read_stdin() {
+            Err(e) => return Err(e),
+            Ok(c) => c,
+        });
     } else {
-    
         for file in config.files {
-
             if file == "-" {
-                output.push_str(
-                    &match read_stdin() {
-                        Err(e) => return Err(e),
-                        Ok(c) => c,
-                    }
-                );
-
-
+                output.push_str(&match read_stdin() {
+                    Err(e) => return Err(e),
+                    Ok(c) => c,
+                });
             } else {
-                output.push_str(
-                    &match read_file(&file) {
-                        Err(e) => {
-                            println!("{}",
-                                match read_file(&HELP_FILE_PATH.to_string()) {
-                                    Err(e) => return Err(e),
-                                    Ok(c) => c,
-                                }  
-                            );
-                            return Err(e);
-                        },
-
-                        Ok(c) => c,
+                output.push_str(&match read_file(&file) {
+                    Err(e) => {
+                        println!(
+                            "{}",
+                            match read_file(&HELP_FILE_PATH.to_string()) {
+                                Err(e) => return Err(e),
+                                Ok(c) => c,
+                            }
+                        );
+                        return Err(e);
                     }
-                );
 
-
+                    Ok(c) => c,
+                });
             }
-
         }
     }
 
-    
     if config.squeeze_blank {
         output = add_squeeze_blank(output);
     }
@@ -99,31 +79,28 @@ fn main() -> Result<(), Error> {
 
     if config.show_line_numbers {
         output = add_line_numbers(output);
-    } 
+    }
 
     if config.show_line_numbers_nonblank {
         output = add_line_numbers_nonblank(output);
     }
-
-
 
     print!("{}", output);
 
     Ok(())
 }
 
-
 fn read_file(path_to_file: &str) -> Result<String, Error> {
     return fs::read_to_string(Path::new(path_to_file));
 }
-
 
 fn read_stdin() -> Result<String, Error> {
     let mut result: String = String::new();
     let stdin = io::stdin();
 
     if stdin.is_terminal() {
-        println!("{}", 
+        println!(
+            "{}",
             match read_file(HELP_FILE_PATH) {
                 Err(e) => return Err(e),
                 Ok(c) => c,
@@ -140,7 +117,6 @@ fn read_stdin() -> Result<String, Error> {
 
     return Ok(result);
 }
-
 
 fn parse_args(args: &[String]) -> Config {
     let mut config = Config {
@@ -169,15 +145,15 @@ fn parse_args(args: &[String]) -> Config {
                 config.show_nonprint = true;
                 config.show_ends = true;
                 config.show_tabs = true;
-            },
+            }
             "-e" => {
                 config.show_nonprint = true;
                 config.show_ends = true;
-            },
+            }
             "-t" => {
                 config.show_nonprint = true;
                 config.show_tabs = true;
-            },
+            }
             "-" => config.files.push(arg.to_string()),
             _ if arg.starts_with('-') => {
                 config.show_help = true;
@@ -194,7 +170,6 @@ fn parse_args(args: &[String]) -> Config {
     config
 }
 
-
 fn add_line_numbers(input: String) -> String {
     let mut result = String::new();
     for (i, line) in input.lines().enumerate() {
@@ -202,7 +177,6 @@ fn add_line_numbers(input: String) -> String {
     }
     result
 }
-
 
 fn add_line_numbers_nonblank(input: String) -> String {
     let mut result = String::new();
@@ -220,7 +194,6 @@ fn add_line_numbers_nonblank(input: String) -> String {
     result
 }
 
-
 fn add_squeeze_blank(input: String) -> String {
     let mut result = String::new();
     let mut previous_blank = false;
@@ -233,7 +206,6 @@ fn add_squeeze_blank(input: String) -> String {
                 result.push_str("\n");
                 previous_blank = true;
             }
-
         } else {
             result.push_str(&format!("{}\n", line));
             previous_blank = false;
@@ -243,7 +215,6 @@ fn add_squeeze_blank(input: String) -> String {
     result
 }
 
-
 fn add_show_ends(input: String) -> String {
     let mut result = String::new();
     for line in input.lines() {
@@ -251,7 +222,6 @@ fn add_show_ends(input: String) -> String {
     }
     result
 }
-
 
 fn add_show_tabs(input: String) -> String {
     let mut result = String::new();
@@ -264,7 +234,6 @@ fn add_show_tabs(input: String) -> String {
     }
     result
 }
-
 
 fn add_show_nonprint(input: String) -> String {
     let mut result = String::new();
